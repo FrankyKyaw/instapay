@@ -12,6 +12,7 @@
     "@metamask/sdk-react": "^0.32.1",
     "@radiustechsystems/sdk": "^1.0.0",
     "@supabase/ssr": "^0.5.2",
+    "hardhat": "^2.22.19",
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

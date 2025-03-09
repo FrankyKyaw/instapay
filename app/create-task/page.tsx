@@ -53,7 +53,7 @@ export default function CreateTask() {
     if (selectedEmployeeId) {
       const selectedEmployee = employees.find(emp => emp.id === selectedEmployeeId);
       if (selectedEmployee) {
-        setAssignedUser(selectedEmployee.crypto_wallet_address);
+        setAssignedUser(selectedEmployee.id);
       }
     }
   }, [selectedEmployeeId, employees]);
@@ -69,7 +69,6 @@ export default function CreateTask() {
         assigned_user: assignedUser, 
         task_description: taskDescription, 
         reward_amount: rewardAmount, 
-        company_id: companyId, 
         status 
       });
 
@@ -82,7 +81,6 @@ export default function CreateTask() {
           assigned_user: assignedUser,
           task_description: taskDescription,
           reward_amount: rewardAmount,
-          company_id: companyId,
           status
         }),
       });
@@ -156,25 +154,7 @@ export default function CreateTask() {
                 </select>
               )}
             </div>
-            <div>
-              <label htmlFor="assignedUser" className="block text-sm font-medium mb-1">
-                Assigned User (Wallet Address)
-              </label>
-              <input
-                id="assignedUser"
-                type="text"
-                value={assignedUser}
-                onChange={(e) => setAssignedUser(e.target.value)}
-                placeholder="0x..."
-                className="w-full p-2 border rounded"
-                required
-                pattern="0x[a-fA-F0-9]{40}"
-                title="Wallet address must start with 0x followed by 40 hexadecimal characters"
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                This will be automatically filled when you select an employee, or you can enter manually
-              </p>
-            </div>
+
             <div>
               <label htmlFor="taskDescription" className="block text-sm font-medium mb-1">
                 Task Description
@@ -200,20 +180,6 @@ export default function CreateTask() {
                 value={rewardAmount}
                 onChange={(e) => setRewardAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="companyId" className="block text-sm font-medium mb-1">
-                Company ID
-              </label>
-              <input
-                id="companyId"
-                type="text"
-                value={companyId}
-                onChange={(e) => setCompanyId(e.target.value)}
-                placeholder="Enter company identifier"
                 className="w-full p-2 border rounded"
                 required
               />

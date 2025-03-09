@@ -21,15 +21,14 @@ export async function POST(request: Request) {
       assigned_user, 
       task_description, 
       reward_amount, 
-      company_id, 
       status = 'pending' // Default status if not provided
     } = body;
 
     // Validate required fields
-    if (!assigned_user || !task_description || !reward_amount || !company_id) {
+    if (!assigned_user || !task_description || !reward_amount ) {
       return NextResponse.json(
         { 
-          error: 'Missing required fields. Please provide assigned_user, task_description, reward_amount, and company_id' 
+          error: 'Missing required fields. Please provide assigned_user, task_description, reward_amount' 
         },
         { status: 400 }
       );
@@ -47,10 +46,9 @@ export async function POST(request: Request) {
       assigned_user, 
       task_description, 
       reward_amount, 
-      company_id, 
       status 
     });
-
+    
     // Insert new task record
     const { data, error } = await supabase
       .from('Tasks')
@@ -59,7 +57,6 @@ export async function POST(request: Request) {
           assigned_user,
           task_description,
           reward_amount: parseFloat(reward_amount),
-          company_id,
           status,
           created_at: new Date().toISOString()
         }
