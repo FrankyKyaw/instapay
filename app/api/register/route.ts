@@ -24,14 +24,14 @@ export async function POST(request: Request) {
       );
     }
 
-    // Insert new employee record
     const { data, error } = await supabase
       .from('Employees')
       .insert([
         {
           name,
           crypto_wallet_address,
-          pay_it_now_status: pay_it_now_status === true // Convert to boolean if not already
+          pay_it_now_status: pay_it_now_status === true, // Convert to boolean if not already
+          credit_balance: 0
         }
       ])
       .select();
